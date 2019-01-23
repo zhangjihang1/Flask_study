@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages(category_filter=["error"]) %}
+        <h3 style="color: red">{{ message }}</h3>
+    {% endfor %}
+    {% for message in get_flashed_messages(category_filter=["ok"]) %}
+        <h3 style="color: green">{{ message }}</h3>
+    {% endfor %}
+
+    <form role="form" method="post" class="col-lg-6 col-md-offset-3">
+        <div class="form-group">
+            <label for="user_name">用户名</label>
+            <input type="text" id="user_name" name="user_name" class="form-control" value="{{ request.args.username }}">
+        </div>
+        <div class="form-group">
+            <label for="user_pwd">用户密码</label>
+            <input type="password" id="user_pwd" name="user_psw" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="submit" name="submit" class="bnt bnt-success" value="登录">
+        </div>
+    </form>
+
+{% endblock %}
+
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#nav-4").addClass("active")
+            }
+        );
+    </script>
+{% endblock %}

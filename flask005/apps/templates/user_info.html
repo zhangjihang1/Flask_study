@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages(category_filter=["error"]) %}
+        <h3 style="color: red">{{ message }}</h3>
+    {% endfor %}
+    {% for message in get_flashed_messages(category_filter=["ok"]) %}
+        <h3 style="color: green">{{ message }}</h3>
+    {% endfor %}
+
+    <div class="jumbotron" style="padding: 5px 20px">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+
+    <div>
+        {% include "user_menu.html" %}
+        <div class="col-md-10">
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>修改个人资料</h2>
+                <hr/>
+                <form role="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        {{ form.user_name.label }}
+                        {{ form.user_name(value=user.name) }}
+                        {% for err in form.user_name.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_email.label }}
+                        {{ form.user_email(value=user.email) }}
+                        {% for err in form.user_email.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_telephone.label }}
+                        {{ form.user_telephone(value=user.telephone) }}
+                        {% for err in form.user_telephone.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_birthday.label }}
+                        {{ form.user_birthday(value=user.birthday) }}
+                        {% for err in form.user_birthday.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_introduction.label }}
+                        {{ form.user_introduction(value=user.introduction) }}
+                        {% for err in form.user_introduction.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_face.label }}
+                        {{ form.user_face(value=user.face) }}
+                        {% for err in form.user_face.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.submit }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-3").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron" style="padding: 5px 20px">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+
+    <div>
+        {% include "user_menu.html" %}
+        <div class="col-md-10">
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>个人资料</h2>
+                <hr />
+                <p>昵称：{{ user.name }}</p>
+                <p>邮箱：{{ user.email }}</p>
+                <p>年龄：{{ user.age }}</p>
+                <p>生日：{{ user.birthday }}</p>
+                <p>头像: {{ user.face }}</p>
+                <img src="{{ url_for("static",filename=uploads_folder+"/"+user.name+"/"+user.face) }}">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-1").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}
+

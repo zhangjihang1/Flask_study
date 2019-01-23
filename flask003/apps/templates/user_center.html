@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron" style="padding: 5px 20px">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+
+    <div>
+        {% include "user_menu.html" %}
+        <div class="col-md-10">
+            <div class="jumbotron">
+                <h1>个人中心</h1>
+                <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar
+                    work.
+                    It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#nav-2").addClass("active")
+            }
+        );
+    </script>
+{% endblock %}
+

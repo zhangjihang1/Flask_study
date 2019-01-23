@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron" style="padding: 5px 20px">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+
+    <div>
+        {% include "user_menu.html" %}
+        <div class="col-md-10">
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>修改个人资料</h2>
+                <hr/>
+                <form role="form" method="post">
+                    <div class="form-group">
+                        {{ form.user_name.label }}
+                        {{ form.user_name(value=user.name) }}
+                        {% for err in form.user_name.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_email.label }}
+                        {{ form.user_email(value=user.email) }}
+                        {% for err in form.user_email.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_age.label }}
+                        {{ form.user_age(value=user.age) }}
+                        {% for err in form.user_age.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_birthday.label }}
+                        {{ form.user_birthday(value=user.birthday) }}
+                        {% for err in form.user_birthday.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.user_face.label }}
+                        {{ form.user_face(value=user.face) }}
+                        {% for err in form.user_face.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.submit }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-3").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}
+

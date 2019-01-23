@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron" style="padding: 5px 20px">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+
+    <div>
+        {% include "user_menu.html" %}
+        <div class="col-md-10">
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>修改密码</h2>
+                <hr/>
+                {% for message in get_flashed_messages(category_filter=["error"]) %}
+                    <h3 style="color: red">{{ message }}</h3>
+                {% endfor %}
+                {% for message in get_flashed_messages(category_filter=["ok"]) %}
+                    <h3 style="color: green">{{ message }}</h3>
+                {% endfor %}
+                <form role="form" method="post">
+                    <div class="form-group">
+                        {{ form.old_psw.label }}
+                        {{ form.old_psw }}
+                        {% for err in form.old_psw.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.new_psw.label }}
+                        {{ form.new_psw }}
+                        {% for err in form.new_psw.errors %}
+                            <p style="color: red">{{ err }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.csrf_token }}
+                        {{ form.submit }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-2").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}
+
